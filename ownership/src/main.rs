@@ -16,9 +16,19 @@ fn main() {
     let hello = String::from("hello");
     takes_ownership(hello);
 
+    let mut helloo = String::from("hello");
+
+    //以下はエラーになる。引数で可変参照を定義してるから
+    //change(hello);
+    change(&mut helloo);
+    println!("{}",helloo);
 }
 //s変数がスコープを抜けるとき(}に来たとき)Rustがdrop関数を呼び、メモリを返還する
 
 fn takes_ownership (some_string:String) {
     println!("{}",some_string);
+}
+
+fn change (some_string: &mut String) {
+    some_string.push_str(",world");
 }
